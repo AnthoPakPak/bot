@@ -56,7 +56,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
     session.send('You reached Greeting intent, you said \'%s\'.', session.message.text);
 })
 .matches('Help', (session) => {
-    session.send('You reached Help intent, you said \'%s\'.', session.message.text);
+    session.send('Bien lbonjour You reached Help intent, you said \'%s\'.', session.message.text);
 })
 .matches('Cancel', (session) => {
     session.send('Bonjour ! You reached Cancel intent, you said \'%s\'.', session.message.text);
