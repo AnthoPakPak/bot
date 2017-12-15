@@ -9,17 +9,14 @@ var botbuilder_azure = require("botbuilder-azure");
 // Setup Restify Server
 var server = restify.createServer();
 server.listen(process.env.port || process.env.PORT || 3978, function () {
-    console.log('%s listening to %s', server.name, server.url);
+   console.log('%s listening to %s', server.name, server.url);
 });
 
 // Create chat connector for communicating with the Bot Framework Service
 var connector = new builder.ChatConnector({
-    //appId: process.env.MicrosoftAppId,
-    appId: "9b0f7770-ce37-4b81-8e4f-5af2742849d7",
-    //appPassword: process.env.MicrosoftAppPassword,
-    appPassword: "omG)CcMx71h.LkfQ",
-    //openIdMetadata: process.env.BotOpenIdMetadata
-    openIdMetadata: "noideawhattoputhere"
+    appId: process.env.MicrosoftAppId,
+    appPassword: process.env.MicrosoftAppPassword,
+    openIdMetadata: process.env.BotOpenIdMetadata
 });
 
 // Listen for messages from users
@@ -40,12 +37,9 @@ var bot = new builder.UniversalBot(connector);
 bot.set('storage', tableStorage);
 
 // Make sure you add code to validate these fields
-//var luisAppId = process.env.LuisAppId;
-var luisAppId = "8d08e1f3-cc90-45ad-a1a6-21f246776252";
-//var luisAPIKey = process.env.LuisAPIKey;
-var luisAPIKey = "e5797474a5d44f87800475f8dd6fbc9d";
-//var luisAPIHostName = process.env.LuisAPIHostName || 'westus.api.cognitive.microsoft.com';
-var luisAPIHostName = 'westus.api.cognitive.microsoft.com';
+var luisAppId = process.env.LuisAppId;
+var luisAPIKey = process.env.LuisAPIKey;
+var luisAPIHostName = process.env.LuisAPIHostName || 'westus.api.cognitive.microsoft.com';
 
 const LuisModelUrl = 'https://' + luisAPIHostName + '/luis/v1/application?id=' + luisAppId + '&subscription-key=' + luisAPIKey;
 
@@ -56,7 +50,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
     session.send('You reached Greeting intent, you said \'%s\'.', session.message.text);
 })
 .matches('Help', (session) => {
-    session.send('Bien lbonjour You reached Help intent, you said \'%s\'.', session.message.text);
+    session.send('You reached Help intent, you said \'%s\'.', session.message.text);
 })
 .matches('Cancel', (session) => {
     session.send('Bonjour ! You reached Cancel intent, you said \'%s\'.', session.message.text);
